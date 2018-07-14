@@ -17,7 +17,10 @@ export class Budget {
       let budget = 0
 
       // start month
-      const numberOfDaysInStartMonth = getNumbersOfDaysInStartMonth(startDate)
+      const numberOfDaysInStartMonth =
+        moment(startDate, 'YYYY-MM-DD')
+          .endOf('month')
+          .diff(moment(startDate, 'YYYY-MM-DD'), 'days') + 1
       const amountDaysFirst = momentStartDate.daysInMonth()
       const firstMonthBudget = this.budgets[momentStartDate.format('YYYY-MM')] || 0
       const totalBudgetFirstMonth = numberOfDaysInStartMonth * (firstMonthBudget / amountDaysFirst)
@@ -34,7 +37,10 @@ export class Budget {
       }
 
       // end month
-      const numberOfDaysInLastMonth = getNumbersOfDaysInEndMonth(endDate)
+
+      const numberOfDaysInLastMonth =
+        moment(endDate, 'YYYY-MM-DD').diff(moment(endDate, 'YYYY-MM-DD').startOf('month'), 'days') +
+        1
       const amountDaysLast = momentEndDate.daysInMonth()
       const lastMonthBudget = this.budgets[momentEndDate.format('YYYY-MM')] || 0
       const totalBudgetLastMonth = numberOfDaysInLastMonth * (lastMonthBudget / amountDaysLast)
@@ -45,19 +51,3 @@ export class Budget {
 }
 
 const getMonth = date => date.substr(0, date.lastIndexOf('-'))
-
-export const getNumbersOfDaysInStartMonth = date => {
-  const startDate = moment(date, 'YYYY-MM-DD')
-  const endDate = moment(date, 'YYYY-MM-DD').endOf('month')
-  const remainingDays = endDate.diff(startDate, 'days')
-
-  return remainingDays + 1
-}
-
-export const getNumbersOfDaysInEndMonth = date => {
-  const endDate = moment(date, 'YYYY-MM-DD')
-  const startDate = moment(date, 'YYYY-MM-DD').startOf('month')
-  const remainingDays = endDate.diff(startDate, 'days')
-
-  return remainingDays + 1
-}

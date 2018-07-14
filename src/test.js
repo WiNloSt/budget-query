@@ -79,21 +79,3 @@ describe('Budget', () => {
     })
   })
 })
-
-describe('getNumbersOfDaysInStartMonth', () => {
-  describe('when month is 2018-07-01', () => {
-    test('should return 31', () => {
-      const result = getNumbersOfDaysInStartMonth('2018-07-01')
-      expect(result).toEqual(31)
-    })
-  })
-})
-
-describe('getNumbersOfDaysInEndMonth', () => {
-  describe('when date is 2018-07-15', () => {
-    test('should return 15', () => {
-      const result = getNumbersOfDaysInEndMonth('2018-07-15')
-      expect(result).toEqual(15)
-    })
-  })
-})
