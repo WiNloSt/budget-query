@@ -21,6 +21,7 @@
     "test:watch": "jest --watchAll"
   },
   "dependencies": {
-    "moment": "^2.22.2"
+    "moment": "^2.22.2",
+    "ramda": "^0.25.0"
   }
 }
