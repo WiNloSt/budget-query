@@ -1,9 +1,9 @@
-import { Budget, getNumbersOfDaysInStartMonth, getNumbersOfDaysInEndMonth } from './query-budget'
+import { Budgets } from './query-budget'
 
 describe('Budget', () => {
   let budget
   beforeEach(() => {
-    budget = new Budget()
+    budget = new Budgets()
   })
 
   describe('query', () => {
