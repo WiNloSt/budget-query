@@ -4,21 +4,26 @@ export class Budgets {
   budgets = {}
 
   query(startDate, endDate) {
-    const momentStartDate = moment(startDate, 'YYYY-MM-DD')
-    const momentEndDate = moment(endDate, 'YYYY-MM-DD')
-    const queryPeriod = new Period(momentStartDate, momentEndDate)
+    const start = moment(startDate, 'YYYY-MM-DD')
+    const end = moment(endDate, 'YYYY-MM-DD')
+
+    return this.calculateBudget(start, end)
+  }
+
+  calculateBudget(start, end) {
+    const queryPeriod = new Period(start, end)
 
     let total = 0
-    const monthDiff = momentEndDate.diff(momentStartDate, 'months')
+    const monthDiff = end.diff(start, 'months')
     for (let month = 0; month <= monthDiff; month++) {
       total += new Budget(
         this.budgets,
         queryPeriod,
         new Period(
-          moment(momentStartDate)
+          moment(start)
             .add(month, 'month')
             .startOf('month'),
-          moment(momentStartDate)
+          moment(start)
             .add(month, 'month')
             .endOf('month')
         )
